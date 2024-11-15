@@ -1,0 +1,32 @@
+<!-- 基于基础模板扩展 -->
+{% extends 'base_generic.html' %}
+<!-- 重写content块 -->
+{% block content %}
+    <h1>我的书架</h1>
+    <!-- 如果上下文变量bookinstances存在且不为空 -->
+    <!-- 由ListView生成的上下文变量是一个列表形式的数据表，每条记录作为一个列表项 -->
+    <hr>
+    {% if bookinstances %}
+        <ul>
+            <!-- 遍历书籍列表 -->
+            {% for bookinstance in bookinstances %}
+                <!-- 如果超过归还日期则设置特殊颜色 -->
+                <li class="{% if bookinstance.is_overdue %}
+                                text-danger
+                           {% endif %}">
+                    <!-- 链接指向 book-detail对应的网址 其中的变量<int:pk>指定为bookinstance.book.pk -->
+                    <a href="{% url 'bookdetail' pk=bookinstance.book.pk %}">
+                            <!-- 书籍标题 -->
+                            {{ bookinstance.book.title }}
+                    </a>
+                    <!-- 归还日期 -->
+                    ({{ bookinstance.due_back }})
+                </li>
+            {% endfor %}
+        </ul>
+    <!-- 如果上下文变量为空 -->
+    {% else %}
+        <p>你的书架还没有书籍哦。</p>
+    {% endif %}
+
+{% endblock %}

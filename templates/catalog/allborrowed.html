@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<h1>书架</h1>
+{% if bookinstances %}
+<table>
+    <tr>
+        <th>书籍标题</th>
+        <th>书籍作者</th>
+        <th>归还时间</th>
+        <th>借阅人员</th>
+        <th>延长时间</th>
+    </tr>
+    {% for bookinstance in bookinstances %}
+        <tr>
+            <td style="width: 200px;"><a href="{{ bookinstance.book.get_absolute_url }}">{{ bookinstance.book.title }}</a></td>
+            <td style="width: 200px;">{{ bookinstance.book.author }}</td>
+            <td style="width: 200px;">{{ bookinstance.due_back }}</td>
+            <td style="width: 200px;">{{ bookinstance.borrower }}</td>
+            <td style="width: 200px;">{% if perms.catalog.can_mark_returned %}<a href="{% url 'renew-book-librarian' pk=bookinstance.id %}">续借</a>{% endif %}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>图书馆尚无人借书哦！</p>
+{% endif %}
+{% endblock %}

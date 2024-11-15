@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>续借: {{bookinst.book.title}}</h1>
+  <p>借阅人员: {{bookinst.borrower}}</p>
+  <p{% if bookinst.is_overdue %} class="text-danger"{% endif %}>归还日期: {{bookinst.due_back}}</p>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+      {{ form }}
+    </table>
+    <input type="submit" value="Submit" />
+  </form>
+{% endblock %}

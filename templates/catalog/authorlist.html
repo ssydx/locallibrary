@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>作者列表</h1>
+  <!-- 判断对象列表是否已定义且不为空 -->
+  {% if authors %}
+    <ul>
+      <!-- 遍历对象列表 -->
+      {% for author in authors %}
+        <li>
+          <a href="{{ author.get_absolute_url }}">{{ author.last_name }}{{ author.first_name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %}
+{% endblock %}

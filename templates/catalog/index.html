@@ -1,0 +1,25 @@
+<!-- 基于base_generic.html进行扩展 -->
+{% extends "base_generic.html" %}
+
+<!-- 替换content块 -->
+{% block content %}
+  <h1>图书馆主页</h1>
+
+  <p>欢迎来到 <em>图书馆网站</em>，这个网站由django搭建。</p>
+
+  <h2>动态内容</h2>
+
+  <p>图书馆记录统计</p>
+  <ul>
+    <!-- 引用指定的变量名称对应的值 -->
+    <li><strong>书籍总数:</strong> {{ num_books }}</li>
+    <li><strong>借阅总数:</strong> {{ num_instances }}</li>
+    <li><strong>维护中的书籍总数</strong> {{ num_instances_maitainance }}</li>
+    <li><strong>作者总数:</strong> {{ num_authors }}</li>
+    <li><strong>书籍类型属于小说类型的数量:</strong> {{ num_genre_filter }}</li>
+  </ul>
+
+  <p>
+    你已经访问本网站 {{ num_visits }} 次啦！
+  </p>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>作者名称: {{ author.last_name }}{{ author.first_name }}</h1>
+
+  <p><strong>性别:</strong> {{ author.gender }}</p>
+  <p><strong>出生日期:</strong>{% if author.date_of_birth %}{{ author.date_of_birth }}{% else %}无{% endif %}</p>
+  <p><strong>去世日期:</strong>{% if author.date_of_death %}{{ author.date_of_death }}{% else %}无{% endif %}</p>
+  <p><a href="{% url 'author_update' author.pk %}">编辑作者</a></p>
+  <p><a href="{% url 'author_delete' author.pk %}">删除作者</a></p>
+  <p><strong>作品:</strong></p>
+    <ul>
+      {% for book in author.book_set.all %}
+        <li>
+          <a href="{{ book.get_absolute_url }}">{{ book.title }}</a>
+          ({{ book.language }})
+          :
+          {% for genre in book.genre.all %}
+            {{ genre }}
+            {% if not forloop.last %}，{% endif %}
+          {% endfor %}
+        </li>
+      {% endfor %}
+    </ul>
+
+  
+  </div>
+{% endblock %}

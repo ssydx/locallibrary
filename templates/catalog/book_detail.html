@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>书籍名称: {{ book.title }}</h1>
+
+  <p><strong>作者:</strong> <a href="{{ book.author.get_absolute_url }}">{{ book.author }}</a></p> 
+  <p><strong>简介:</strong> {{ book.summary }}</p>
+  <p><strong>ISBN码:</strong> {{ book.isbn }}</p>
+  <p><strong>语言:</strong> {{ book.language }}</p>
+  <p>
+    <strong>类型:</strong> 
+      {% for genre in book.genre.all %}
+        {{ genre }}
+        {% if not forloop.last %}，{% endif %}
+      {% endfor %}
+  </p>
+  <p><a href="{% url 'book_update' book.pk %}">编辑书籍</a></p>
+  <p><a href="{% url 'book_delete' book.pk %}">删除书籍</a></p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>已借出</h4>
+    <!-- 反向追溯，即由主表反推出引用主表的副表 -->
+    {% for bookinstance in book.bookinstance_set.all %}
+      <hr>
+      <p class="
+                {% if bookinstance.status == 'a' %}text-success
+                {% elif bookinstance.status == 'r' %}text-danger
+                {% else %}text-warning
+                {% endif %}">
+        <!-- 针对值类型为choices的存储值获取其对应的显示值 -->
+        {{ bookinstance.get_status_display }}
+      </p>
+      {% if bookinstance.status != 'a' %}
+        <p>
+          <strong>预计归还日期:</strong> 
+          {{bookinstance.due_back}}
+        </p>
+      {% endif %}
+      <!-- <p><strong>Imprint:</strong> {{bookinstance.imprint}}</p> -->
+      <p class="text-muted"><strong>借书Id:</strong> {{bookinstance.id}}</p>
+    {% endfor %}
+  </div>
+{% endblock %} 
