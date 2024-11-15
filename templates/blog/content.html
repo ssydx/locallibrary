@@ -1,0 +1,7 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h1>博文信息</h1>
+<p>博文标题：{{ blogcontent.name }}</p>
+<p>博文作者：<a href="{{ blogcontent.author.get_absolute_url }}">{{ blogcontent.author }}</a></p>
+<p>博文内容：{{ blogcontent.content }}</p>
+{% endblock %}

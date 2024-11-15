@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h1>博文列表</h1>
+{% if blogcontents %}
+    {% for content in blogcontents %}
+    <p><a href="{{ content.get_absolute_url }}">{{ content.name }}</a>({{ content.upload_date }})</p>
+    {% endfor %}
+{% else %}
+<p>暂无博主</p>
+{% endif %}
+{% endblock %}

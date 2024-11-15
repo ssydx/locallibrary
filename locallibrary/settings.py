@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 个人应用模块
     'catalog.apps.CatalogConfig',
+    'blog.apps.BlogConfig'
     # 'field',
 ]
 # 中间件配置

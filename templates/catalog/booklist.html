@@ -3,6 +3,7 @@
 {% block content %}
   <h1>书籍列表</h1>
   <!-- 判断对象列表是否已定义且不为空 -->
+  <p><a href="{% url 'book_create' %}">创建书籍</a></p>
   {% if books %}
     <ul>
       <!-- 遍历对象列表 -->

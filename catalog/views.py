@@ -117,7 +117,7 @@ class BookCreate(CreateView):
     initial = {
         'title':'书籍标题',
     }
-    template_name = 'catalog/book_create.html'
+    template_name = 'catalog/book_form.html'
 class BookUpdate(UpdateView):
     model = Book
     fields = ['title','summary']

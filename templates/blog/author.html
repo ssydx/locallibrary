@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h1>博主信息</h1>
+<p>博主姓名：{{ blogauthor.name }}</p>
+<p>博主年龄：{{ blogauthor.age }}</p>
+<p>博主简介：{{ blogauthor.desc }}</p>
+<h2>博文列表</h2>
+{% for blogcontent in blogauthor.blogcontents.all %}
+    <p><a href="{{ blogcontent.get_absolute_url }}">{{ blogcontent.name }}</a>-{{ blogcontent.upload_date }}</p>
+{% endfor %}
+{% endblock %}

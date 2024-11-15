@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<h1>博主列表</h1>
+{% if blogauthors %}
+    {% for author in blogauthors %}
+    <p><a href="{{ author.get_absolute_url }}">{{ author.name }}</a>({{ author.age }})</p>
+    {% endfor %}
+{% else %}
+<p>暂无博主</p>
+{% endif %}
+{% endblock %}

@@ -24,6 +24,10 @@ urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 
+urlpatterns += [
+    path('blog/', include('blog.urls')),
+]
+
 
 
 # 载入配置中的设置，本质仍然载入当前项目的settings.py
